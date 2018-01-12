@@ -1,5 +1,5 @@
 const longEnough = (entry) => {
-    if (entry.length >= 3) {
+    if (entry.length >= 5) {
         return true;
     } else {
         return false;

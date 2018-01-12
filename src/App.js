@@ -44,7 +44,7 @@ class ConnectedApp extends React.Component {
         <Button className="counterButton" handleOnClick={this.props.add}>+</Button>
         <Button className="counterButton" disabled={this.props.count === 0} handleOnClick={this.props.subtract}>-</Button>
         <Count count={this.props.count} /><br />
-        <Input placeholder="Minimum 3" type="text" handleOnChange={this.props.updateMessage} /><br />
+        <Input placeholder="Minimum 5" type="text" handleOnChange={this.props.updateMessage} /><br />
         {errorMessage()}<br />
         <Button disabled={!this.props.inputValid}>Send Message</Button>
       </div>
