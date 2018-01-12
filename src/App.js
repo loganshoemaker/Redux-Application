@@ -5,13 +5,14 @@ import Button from './components/Button';
 import Count from './components/Count';
 import Input from './components/Input';
 
-import { addition, checkvalidity, subtraction } from "./actions";
+import { addition, subtraction, updateInputMessage } from "./actions";
 
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
     count: state.count,
+    inputMessage: state.inputMessage,
     inputValid: state.inputValid,
   };
 };
@@ -19,25 +20,21 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     add: () => dispatch(addition()),
-    checkvalidity: (e) => dispatch(checkvalidity(e)),
     subtract: () => dispatch(subtraction()),
+    updateMessage: (e) => dispatch(updateInputMessage(e)),
   }
 }
 
 class ConnectedApp extends React.Component {
 
   render() {
-    console.log(this.props);
-
     const errorMessage = () => {
-      if (this.props.inputValid) {
-        return (
-          <span>The text is long enough</span>
-        )
-      } else {
-        return (
-          <span>The text is not long enough</span>
-        )
+      if (this.props.inputMessage.length > 0) {
+        if (!this.props.inputValid) {
+          return (
+            <span style={{ color: 'red', }}>The text is not long enough</span>
+          )
+        }
       }
     }
 
@@ -45,11 +42,10 @@ class ConnectedApp extends React.Component {
       <div>
         <Button handleOnClick={this.props.add}>+</Button>
         <Button handleOnClick={this.props.subtract}>-</Button>
-        <Count count={this.props.count} />
-        <br />
-        <Input placeholder="Minimum 3" type="text" handleOnChange={this.props.checkvalidity} handleOnBlur={this.props.checkvalidity} />
-        <br />
-        {errorMessage()}
+        <Count count={this.props.count} /><br />
+        <Input placeholder="Minimum 3" type="text" handleOnChange={this.props.updateMessage} /><br />
+        {errorMessage()}<br />
+        <Button disabled={!this.props.inputValid}>Send Message</Button>
       </div>
     );
   }

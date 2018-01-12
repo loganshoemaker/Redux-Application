@@ -2,10 +2,10 @@ import React from 'react';
 
 const Button = (props) => {
 
-    const { children, handleOnClick, } = props;
+    const { children, disabled, handleOnClick, } = props;
 
     return (
-        <button onClick={handleOnClick}>{children}</button>
+        <button disabled={disabled} onClick={handleOnClick}>{children}</button>
     );
 };
 
