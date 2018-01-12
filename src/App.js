@@ -4,9 +4,9 @@ import React from 'react';
 import Button from './components/Button';
 import Count from './components/Count';
 import Input from './components/Input';
+import './App.css';
 
 import { addition, subtraction, updateInputMessage } from "./actions";
-
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
@@ -28,6 +28,7 @@ const mapDispatchToProps = dispatch => {
 class ConnectedApp extends React.Component {
 
   render() {
+
     const errorMessage = () => {
       if (this.props.inputMessage.length > 0) {
         if (!this.props.inputValid) {
@@ -40,8 +41,8 @@ class ConnectedApp extends React.Component {
 
     return (
       <div>
-        <Button handleOnClick={this.props.add}>+</Button>
-        <Button handleOnClick={this.props.subtract}>-</Button>
+        <Button className="counterButton" handleOnClick={this.props.add}>+</Button>
+        <Button className="counterButton" disabled={this.props.count === 0} handleOnClick={this.props.subtract}>-</Button>
         <Count count={this.props.count} /><br />
         <Input placeholder="Minimum 3" type="text" handleOnChange={this.props.updateMessage} /><br />
         {errorMessage()}<br />
